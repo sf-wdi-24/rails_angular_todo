@@ -53,7 +53,7 @@ app.controller('TodosIndexCtrl', ['$scope', 'Todo', function ($scope, Todo) {
   };
 
   $scope.deleteTodo = function(todo) {
-    Todo.remove(todo);
+    Todo.remove({ id: todo.id });
     var todoIndex = $scope.todos.indexOf(todo);
     $scope.todos.splice(todoIndex, 1);
   };

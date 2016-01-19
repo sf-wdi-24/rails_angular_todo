@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+
+    <!-- form to create new todo -->
+    <form ng-submit="createTodo()">
+      <div class="form-group">
+        <label for="todo_title">New To Do</label>
+        <input type="text" ng-model="todo.title" class="form-control" id="todo_title" placeholder="What do you need to do?" autofocus>
+      </div>
+      <div class="form-group">
+        <label for="todo_description">Description</label>
+        <textarea ng-model="todo.description" class="form-control" id="todo_description" placeholder="Describe the task."></textarea>
+      </div>
+      <input type="submit" value="Add To Do" class="btn btn-default">
+    </form>
+    
+    <!-- show all todos -->
+    <div ng-if="todos.length > 0">
+      <hr>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">To Do List</h3>
+        </div>
+        <ul class="list-group">
+          <li ng-repeat="todo in todos" class="list-group-item">
+            
+            <!-- todo content -->
+            <div ng-hide="todo.editForm">
+              <div class="pull-right">
+                <a href="#" ng-click="markDone(todo)"><i class="fa fa-check"></i></a>
+                <a href="#" ng-click="todo.editForm = true"><i class="fa fa-pencil"></i></a>
+                <a href="#" ng-click="deleteTodo(todo)"><i class="fa fa-times"></i></a>
+              </div>
+              <h5 class="list-group-item-heading"><span ng-class="{done: todo.done}">{{todo.title}}</span></h5>
+              <p class="list-group-item-text"><span ng-class="{done: todo.done}">{{todo.description}}</span></p>
+            </div>
+            
+            <!-- form to edit todo -->
+            <form ng-show="todo.editForm" ng-submit="updateTodo(todo)">
+              <div class="form-group">
+                <input type="text" ng-model="todo.title" class="form-control" placeholder="What do you need to do?">
+              </div>
+              <div class="form-group">
+                <textarea ng-model="todo.description" class="form-control" placeholder="Describe the task."></textarea>
+              </div>
+              <input type="submit" value="Save To Do" class="btn btn-default">
+            </form>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
